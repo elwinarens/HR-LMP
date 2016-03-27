@@ -18,3 +18,15 @@ removeFst x (y:ys) | y == x = ys
 srtInts :: [Int] -> [Int]
 srtInts [] = []
 srtInts xs = m : (srtInts (removeFst m xs)) where m = mnmInt xs
+
+average :: [Int] -> Float
+average [] = error "empty list"
+avergae (xs) = fromIntegral (sum xs) / fromIntegral (length xs)
+
+sum' :: [Int] -> Int
+sum' [] = 0
+sum' (x:xs) = x + sum' xs
+
+length' :: [Int] -> Int
+length' [] = 0
+length' (x:xs) = 1 + length' xs
