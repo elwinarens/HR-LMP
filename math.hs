@@ -27,6 +27,11 @@ sum' :: [Int] -> Int
 sum' [] = 0
 sum' (x:xs) = x + sum' xs
 
-length' :: [Int] -> Int
+length' :: [a] -> Int
 length' [] = 0
 length' (x:xs) = 1 + length' xs
+
+count' :: (Eq a) => a -> [a] -> Int
+count' x [] = 0
+count' x (y:ys) | x == y = 1 + count' x ys
+                | otherwise = count' x ys
