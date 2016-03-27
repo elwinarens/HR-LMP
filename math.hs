@@ -15,3 +15,6 @@ removeFst x [y] | x == y = []
 removeFst x (y:ys) | y == x = ys
                    | otherwise = y : removeFst x ys
 
+srtInts :: [Int] -> [Int]
+srtInts [] = []
+srtInts xs = m : (srtInts (removeFst m xs)) where m = mnmInt xs
