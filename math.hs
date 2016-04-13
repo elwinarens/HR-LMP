@@ -9,23 +9,22 @@ mxxInt [x] = x
 mxxInt (x:xs) = max x (mxxInt xs)
 
 -- Exercise 1.10
-removeFst :: Int -> [Int] -> [Int]
-removeFst x [] = []
-removeFst x [y] | x == y = []
-                | otherwise = [y]
-removeFst x (y:ys) | y == x = ys
-                   | otherwise = y : removeFst x ys
+removeFst cmp x [] = []
+removeFst cmp x [y] | x `cmp` y = []
+                    | otherwise = [y]
+removeFst cmp x (y:ys) | y `cmp` x = ys
+                       | otherwise = y : removeFst cmp x ys
 
 -- Example 1.11
 srtInts :: [Int] -> [Int]
 srtInts [] = []
-srtInts xs = m : (srtInts (removeFst m xs)) where m = mnmInt xs
+srtInts xs = m : (srtInts (removeFst (==) m xs)) where m = mnmInt xs
 
 srtInts' :: [Int] -> [Int]
 srtInts' [] = []
 srtInts' xs = let
                  m = mnmInt xs
-              in m : (srtInts' (removeFst m xs))
+              in m : (srtInts' (removeFst (==) m xs))
 
 -- Example 1.12
 average :: [Int] -> Float
@@ -54,3 +53,10 @@ blowup str = blowup' str 1
 blowup' :: String -> Int -> String
 blowup' "" n = ""
 blowup' (x:xs) n = replicate n x ++ (blowup' xs (n+1))
+
+
+-- Exercise 1.15
+-- Or just use Data.List.sort :-)
+srtString :: String -> String
+srtString [] = []
+srtString xs = m : (srtString (removeFst (==) m xs)) where m = minimum xs
