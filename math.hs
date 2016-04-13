@@ -21,7 +21,8 @@ srtInts :: [Int] -> [Int]
 srtInts [] = []
 srtInts xs = m : (srtInts (removeFst m xs)) where m = mnmInt xs
 
-srtInts' :: [Int] -> [Int] srtInts’ [] = []
+srtInts' :: [Int] -> [Int]
+srtInts' [] = []
 srtInts' xs = let
                  m = mnmInt xs
               in m : (srtInts' (removeFst m xs))
@@ -46,3 +47,10 @@ count' x (y:ys) | x == y = 1 + count' x ys
                 | otherwise = count' x ys
 
 -- Exercise 1.14
+blowup :: String -> String
+blowup "" = ""
+blowup str = blowup' str 1
+
+blowup' :: String -> Int -> String
+blowup' "" n = ""
+blowup' (x:xs) n = replicate n x ++ (blowup' xs (n+1))
